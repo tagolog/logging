@@ -1,0 +1,35 @@
+﻿declare @messageId uniqueidentifier
+set @messageId = newid()
+
+insert into Log.Message(
+    CustomerId,
+    ApplicationId,
+	MessageId,
+    LevelId,
+    Created,
+    Logged,
+	CreatedTicks,
+    CorrelationId,
+	LogUserIdentity,
+    LogIPAddress,
+    RequestIPAddress,
+    MessageText,
+    ExceptionText,
+    PacketLength,
+	SphinxTagsText )
+  select
+    @customerId as CustomerId,
+    @applicationId as ApplicationId,
+	@messageId as MessageId,
+    @logLevelId as LevelId,
+    @created as Created,
+    @logged as Logged,
+	@createdTicks as CreatedTicks,
+    @correlationId as CorrelationId,
+	@logUserIdentity as LogUserIdentity,
+    @logIPAddress as LogIPAddress,
+    @requestIPAddress as RequestIPAddress,
+    @messageText as MessageText,
+    @exceptionText as ExceptionText,
+    @packetLength as PacketLength,
+	@SphinxTagsText as SphinxTagsText

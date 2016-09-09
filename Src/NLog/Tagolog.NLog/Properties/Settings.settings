@@ -1,0 +1,12 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Tagolog.NLog.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="DefaultMessageLayout" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">${message}</Value>
+    </Setting>
+    <Setting Name="DefaultExceptionLayout" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">${exception:format=tostring}</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

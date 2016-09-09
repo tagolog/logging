@@ -1,0 +1,86 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.40629.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Examples", "Examples", "{9A9ECC65-5544-4092-81C5-8B9287296B5A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NLog", "NLog", "{6B21A631-3001-4FD5-8766-AD7ACD6E7FEB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tagolog", "Tagolog\Tagolog.csproj", "{1745BECA-9083-4211-AFAC-124860FFB16C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tagolog.NLog", "NLog\Tagolog.NLog\Tagolog.NLog.csproj", "{D4EF2902-A31B-4588-88C6-9C2F0D97F26E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CloudHosting", "CloudHosting", "{EB665850-DCC9-4E45-A3B4-EABEFD5F419C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tagolog.Examples.CloudHosting.Emulator", "Examples\CloudHosting\Emulator\Tagolog.Examples.CloudHosting.Emulator.csproj", "{CD4AB063-96FE-45C1-B7D3-B7D2EACAE345}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NLog", "NLog", "{F3ECB4C5-695B-4EAA-B5EF-1B191799882B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tagolog.Examples.CloudHosting.NLog.TextLogConsoleExample", "Examples\CloudHosting\NLog\TextLogConsoleExample\Tagolog.Examples.CloudHosting.NLog.TextLogConsoleExample.csproj", "{0273A55C-9042-4A8D-BF60-A66CE974F987}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|Mixed Platforms = Debug|Mixed Platforms
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|Mixed Platforms = Release|Mixed Platforms
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1745BECA-9083-4211-AFAC-124860FFB16C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1745BECA-9083-4211-AFAC-124860FFB16C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1745BECA-9083-4211-AFAC-124860FFB16C}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{1745BECA-9083-4211-AFAC-124860FFB16C}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{1745BECA-9083-4211-AFAC-124860FFB16C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{1745BECA-9083-4211-AFAC-124860FFB16C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1745BECA-9083-4211-AFAC-124860FFB16C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1745BECA-9083-4211-AFAC-124860FFB16C}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{1745BECA-9083-4211-AFAC-124860FFB16C}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{1745BECA-9083-4211-AFAC-124860FFB16C}.Release|x86.ActiveCfg = Release|Any CPU
+		{D4EF2902-A31B-4588-88C6-9C2F0D97F26E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4EF2902-A31B-4588-88C6-9C2F0D97F26E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4EF2902-A31B-4588-88C6-9C2F0D97F26E}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{D4EF2902-A31B-4588-88C6-9C2F0D97F26E}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{D4EF2902-A31B-4588-88C6-9C2F0D97F26E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D4EF2902-A31B-4588-88C6-9C2F0D97F26E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4EF2902-A31B-4588-88C6-9C2F0D97F26E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D4EF2902-A31B-4588-88C6-9C2F0D97F26E}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{D4EF2902-A31B-4588-88C6-9C2F0D97F26E}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{D4EF2902-A31B-4588-88C6-9C2F0D97F26E}.Release|x86.ActiveCfg = Release|Any CPU
+		{CD4AB063-96FE-45C1-B7D3-B7D2EACAE345}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD4AB063-96FE-45C1-B7D3-B7D2EACAE345}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD4AB063-96FE-45C1-B7D3-B7D2EACAE345}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{CD4AB063-96FE-45C1-B7D3-B7D2EACAE345}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{CD4AB063-96FE-45C1-B7D3-B7D2EACAE345}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{CD4AB063-96FE-45C1-B7D3-B7D2EACAE345}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD4AB063-96FE-45C1-B7D3-B7D2EACAE345}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD4AB063-96FE-45C1-B7D3-B7D2EACAE345}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{CD4AB063-96FE-45C1-B7D3-B7D2EACAE345}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{CD4AB063-96FE-45C1-B7D3-B7D2EACAE345}.Release|x86.ActiveCfg = Release|Any CPU
+		{0273A55C-9042-4A8D-BF60-A66CE974F987}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0273A55C-9042-4A8D-BF60-A66CE974F987}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0273A55C-9042-4A8D-BF60-A66CE974F987}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{0273A55C-9042-4A8D-BF60-A66CE974F987}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{0273A55C-9042-4A8D-BF60-A66CE974F987}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{0273A55C-9042-4A8D-BF60-A66CE974F987}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0273A55C-9042-4A8D-BF60-A66CE974F987}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0273A55C-9042-4A8D-BF60-A66CE974F987}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{0273A55C-9042-4A8D-BF60-A66CE974F987}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{0273A55C-9042-4A8D-BF60-A66CE974F987}.Release|x86.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D4EF2902-A31B-4588-88C6-9C2F0D97F26E} = {6B21A631-3001-4FD5-8766-AD7ACD6E7FEB}
+		{EB665850-DCC9-4E45-A3B4-EABEFD5F419C} = {9A9ECC65-5544-4092-81C5-8B9287296B5A}
+		{CD4AB063-96FE-45C1-B7D3-B7D2EACAE345} = {EB665850-DCC9-4E45-A3B4-EABEFD5F419C}
+		{F3ECB4C5-695B-4EAA-B5EF-1B191799882B} = {EB665850-DCC9-4E45-A3B4-EABEFD5F419C}
+		{0273A55C-9042-4A8D-BF60-A66CE974F987} = {F3ECB4C5-695B-4EAA-B5EF-1B191799882B}
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = Tagolog.Logging.vsmdi
+	EndGlobalSection
+EndGlobal

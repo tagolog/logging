@@ -1,0 +1,39 @@
+﻿insert into Log.Tag
+(
+  CustomerId,
+  Code,
+  Name
+)
+  select
+      @customerId,
+      logEntryTag.Code,
+      logEntryTag.Code
+    from Log.Tag as dbTag
+    right join
+    (
+      {logEntryTagCodes_UnionAll}
+    ) as logEntryTag
+    on
+      logEntryTag.Code = dbTag.Code
+    where
+      (
+        dbTag.CustomerId is null
+          or
+        dbTag.CustomerId = @customerId
+      ) and
+      dbTag.Code is null;
+
+select
+    dbTag.CustomerId as CustomerId,
+    dbTag.TagId as Id,
+    dbTag.Code as Code,
+    dbTag.TagRowId as RowId
+  from Log.Tag as dbTag
+  join
+  (
+    {logEntryTagCodes_UnionAll}
+  ) as logEntryTag
+  on
+    logEntryTag.Code = dbTag.Code
+  where
+    dbTag.CustomerId = @customerId;

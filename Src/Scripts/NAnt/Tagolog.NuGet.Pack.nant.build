@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<project name="Tagolog.NuGet.Pack" default="Tagolog.NuGet.Pack.Main" xmlns="http://nant.sf.net/release/0.92/nant.xsd">
+    <property name="solution_name" value="Tagolog.Logging.sln" />
+    <property name="solution_directory" value="${project::get-base-directory()}\..\.." />
+    <property name="solution_cleandirectory" value="${solution_directory}" />
+    <property name="solution_filename" value="${solution_directory}\${solution_name}" />
+    <property name="solution_platform" value="Any CPU" />
+    <property name="solution_visual_studio_version" value="12.0" />
+    <property name="msbuild_exe" value="${environment::get-variable('WINDIR')}\Microsoft.NET\Framework\v4.0.30319\msbuild.exe" readonly="true" />
+    <property name="msbuild_log_enabled" value="false" />
+    <property name="msbuild_log" value="${solution_directory}\msbuild.log" />
+    <target name="Tagolog.NuGet.Pack.Main">
+        <property name="solution_configuration" value="Release" />
+        <call target="solution_clean" />
+        <call target="solution_rebuild" />
+        <call target="solution_nunit" />
+        <delete file="${project::get-base-directory()}\TestResult.xml" />
+        <call target="tagolog_nuget_pack" />
+    </target>
+    <target name="tagolog_nuget_pack">
+        <exec program="nuget.exe" resultproperty="nuget_result">
+            <arg value="pack" />
+            <arg value="${solution_directory}\Tagolog\Tagolog.nuspec" />
+            <arg value="-OutputDirectory &quot;${solution_directory}\..\NuGet&quot;" />
+        </exec>
+        <echo message="NuGet pack result ${nuget_result}" />
+    </target>
+    <include buildfile="${project::get-base-directory()}\Include\Rebuild.include.nant.build" />
+</project>

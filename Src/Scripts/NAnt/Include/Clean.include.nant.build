@@ -1,0 +1,16 @@
+<project name="Tagolog" xmlns="http://nant.sf.net/release/0.92/nant.xsd">
+    <!--
+        Parameters:
+            ${solution.cleandirectory} - directory to start cleaning from.
+    -->
+    <target name="solution_clean">
+        <delete>
+            <fileset>
+                <include name="${solution_cleandirectory}/**/bin/**" />
+                <include name="${solution_cleandirectory}/**/obj/**" />
+                <include name="${solution_cleandirectory}/**/*.suo" />
+                <include name="${solution_cleandirectory}/**/*.user" />
+            </fileset>
+        </delete>
+    </target>
+</project>

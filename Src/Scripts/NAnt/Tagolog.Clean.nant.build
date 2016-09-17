@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<project name="Tagolog.Logging.Clean" default="Tagolog.Logging.Clean.Main" xmlns="http://nant.sf.net/release/0.92/nant.xsd">
+    <property name="solution_directory" value="${project::get-base-directory()}\..\.." />
+    <property name="solution_cleandirectory" value="${solution_directory}" />
+    <target name="Tagolog.Logging.Clean.Main">
+        <call target="solution_clean" />
+    </target>
+    <include buildfile="${project::get-base-directory()}\Include\Clean.include.nant.build" />
+</project>

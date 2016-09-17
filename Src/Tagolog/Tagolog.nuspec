@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package >
+    <metadata>
+        <id>Tagolog</id>
+        <version>0.1</version>
+        <title>Tagolog</title>
+        <authors>w@tagolog.com</authors>
+        <owners>w@tagolog.com</owners>
+        <licenseUrl>https://raw.github.com/tagolog/Logging/master/license.txt</licenseUrl>
+        <projectUrl>https://github.com/tagolog/Logging</projectUrl>
+        <iconUrl>https://raw.github.com/tagolog/Logging/master/NuGet/Icons/Tag-O-Log.512x512.ico</iconUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>Tagolog is a structured logging library for .NET. It can help you produce log entries marked with tags easily.</description>
+        <tags>logging log tracing logfile structured tag</tags>
+    </metadata>
+    <files>
+        <file src="bin/Release/Tagolog.dll" target="lib\net35\" />
+        <file src="bin/Release/Tagolog.pdb" target="lib\net35\" />
+    </files>
+</package>

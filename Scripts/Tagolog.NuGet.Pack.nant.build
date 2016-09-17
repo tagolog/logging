@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<project name="Rebuild All" default="main">
+    <property name="root" value="${project::get-base-directory()}\.." />
+    <property name="solution_platform" value="Any CPU" />
+    <property name="solution_visual_studio_version" value="12.0" />
+    <property name="msbuild_exe" value="${environment::get-variable('WINDIR')}\Microsoft.NET\Framework\v4.0.30319\msbuild.exe" readonly="true" />
+    <property name="msbuild_log_enabled" value="false" />
+    <property name="msbuild_log" value="${root}\msbuild.log" />
+    <target name="main">
+        <property name="directory_to_search_for_solutions" value="${root}\DP" />
+        <call target="find_and_build_all_solutions_in_directory" />
+        <property name="directory_to_search_for_solutions" value="${root}\Degu" />
+        <call target="find_and_build_all_solutions_in_directory" />
+    </target>
+    <target name="find_and_build_all_solutions_in_directory">
+        <foreach item="File" property="file_name">
+            <in>
+                <items>
+                    <include name="${directory_to_search_for_solutions}\**\*.sln" />
+                    <exclude name="${directory_to_search_for_solutions}\Degu.Documentarium\Degu.Documentarium.sln" />
+                    <exclude name="${directory_to_search_for_solutions}\Macaque\Macaque.sln" />
+                </items>
+            </in>
+            <do>
+                <property name="solution_filename" value="${file_name}" />
+                <property name="solution_name" value="${path::get-file-name(solution_filename)}" />
+                <property name="solution_directory" value="${path::get-directory-name(solution_filename)}" />
+                <property name="solution_cleandirectory" value="${root}" />
+                <property name="solution_configuration" value="Debug" />
+                <call target="solution_clean"   />
+                <call target="solution_rebuild" />
+                <!-- call target="solution_nunit" / -->
+                <property name="solution_configuration" value="Release" />
+                <call target="solution_clean"   />
+                <call target="solution_rebuild" />
+                <!-- call target="solution_nunit"   / -->
+            </do>
+        </foreach>
+    </target>
+    <include buildfile="${root}\Scripts\Include\rebuild.include.nant.build" />
+</project>

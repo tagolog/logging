@@ -1,0 +1,81 @@
+<project name="Tagolog" xmlns="http://nant.sf.net/release/0.92/nant.xsd">
+    <property name="msbuild_exe" value="${environment::get-variable('WINDIR')}\Microsoft.NET\Framework\v4.0.30319\msbuild.exe" />
+
+    <!--
+        Parameters:
+            ${solution_cleandirectory} - directory to start cleaning from.
+    -->
+    <target name="solution_clean">
+        <delete>
+            <fileset>
+                <include name="${solution_cleandirectory}/**/bin/**" />
+                <include name="${solution_cleandirectory}/**/obj/**" />
+                <include name="${solution_cleandirectory}/**/*.suo" />
+                <include name="${solution_cleandirectory}/**/*.user" />
+            </fileset>
+        </delete>
+    </target>
+
+    <!--
+        Parameters:
+            ${solution_name}
+            ${solution_filename}
+            ${solution_platform}
+            ${solution_configuration}
+            ${solution_visual_studio_version}
+            ${msbuild_exe}
+            ${msbuild_log}
+            ${msbuild_log_enabled}
+        Output parameters:
+            ${msbuild_result}
+    -->
+    <target name="solution_rebuild">
+        <echo message="Build ${solution_name} - ${solution_configuration}" />
+        <exec program="${msbuild_exe}" resultproperty="msbuild_result">
+            <arg value="/nologo" />
+            <arg value="/m" />
+            <!-- q[uiet], m[inimal], n[ormal], d[etailed], diag[nostic]. -->
+            <arg value="/verbosity:quiet" />
+            <arg value='/p:Platform="${solution_platform}"' />
+            <arg value="/property:configuration=${solution_configuration}" />
+            <arg value="/p:VisualStudioVersion=${solution_visual_studio_version}" />
+            <arg value="/p:ResolveAssemblyWarnOrErrorOnTargetArchitectureMismatch=none" />
+            <arg value="/target:rebuild" />
+            <arg value="/fileLogger1" if="${msbuild_log_enabled}" />
+            <arg value="/fileLoggerParameters1:LogFile=${msbuild_log}" if="${msbuild_log_enabled}" />
+            <arg value='"${solution_filename}"' />
+        </exec>
+        <echo message="Build result ${msbuild_result}" />
+    </target>
+
+    <!--
+        Parameters:
+            ${solution_directory}
+            ${solution_configuration}
+    -->
+    <target name="solution_nunit">
+        <foreach item="Folder" property="directory_name">
+            <in>
+                <items>
+                    <include name="${solution_directory}\**\bin" />
+                </items>
+            </in>
+            <do>
+                <!-- echo message="Directory: ${folderName}" / -->
+                <foreach item="File" property="file_name">
+                    <in>
+                        <items>
+                            <include name="${directory_name}\${solution_configuration}\*unittest*.dll" />
+                        </items>
+                    </in>
+                    <do>
+                        <echo message="Unit tests DLL: ${file_name}" />
+                        <exec program="nunit3-console">
+                            <arg value="${file_name}" />
+                        </exec>
+                    </do>
+                </foreach>
+            </do>
+        </foreach>
+    </target>
+</project>

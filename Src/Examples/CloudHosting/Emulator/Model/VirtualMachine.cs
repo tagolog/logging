@@ -1,4 +1,5 @@
-﻿using System.Timers;
+﻿using System;
+using System.Timers;
 using Common.Logging;
 using Tagolog.Examples.CloudHosting.Emulator.Helpers;
 
@@ -31,16 +32,23 @@ namespace Tagolog.Examples.CloudHosting.Emulator.Model
         {
             using ( var scope = TagScopeManager.CreateScope() )
             {
-                scope.Tags[ AppTag.Application ] = DataCenter.ApplicationName;
-                scope.Tags[ AppTag.VirtualMachine ] = Name;
+                try
+                {
+                    scope.Tags[ AppTag.Application ] = DataCenter.ApplicationName;
+                    scope.Tags[ AppTag.VirtualMachine ] = Name;
 
-                var random = RandomHelper.GenerateInt( 0, 100 );
-                if ( random < 30 )
-                    _logger.Info( "Low memory and CPU usage." );
-                if ( random < 60 )
-                    _logger.Warn( "Medium memory and CPU usage." );
-                else
-                    _logger.Error( "High memory and CPU usage." );
+                    var random = RandomHelper.GenerateInt( 0, 100 );
+                    if ( random < 30 )
+                        _logger.Info( "Low memory and CPU usage." );
+                    if ( random < 60 )
+                        _logger.Warn( "Medium memory and CPU usage." );
+                    else
+                        throw new InvalidOperationException( "High memory and CPU usage." );
+                }
+                catch ( InvalidOperationException ex )
+                {
+                    _logger.Error( ex.Message, ex );
+                }
             }
         }
 

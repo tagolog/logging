@@ -16,6 +16,7 @@
         <call target="solution_nunit" />
         <delete file="${project::get-base-directory()}\TestResult.xml" />
         <call target="tagolog_nuget_pack" />
+        <call target="tagolog_nlog_nuget_pack" />
     </target>
     <target name="tagolog_nuget_pack">
         <exec program="nuget.exe" resultproperty="nuget_result">
@@ -23,7 +24,15 @@
             <arg value="${solution_directory}\Tagolog\Tagolog.nuspec" />
             <arg value="-OutputDirectory &quot;${solution_directory}\..\NuGet&quot;" />
         </exec>
-        <echo message="NuGet pack result ${nuget_result}" />
+        <echo message="Tagolog NuGet pack result ${nuget_result}" />
+    </target>
+    <target name="tagolog_nlog_nuget_pack">
+        <exec program="nuget.exe" resultproperty="nuget_result">
+            <arg value="pack" />
+            <arg value="${solution_directory}\NLog\Tagolog.NLog\Tagolog.NLog.nuspec" />
+            <arg value="-OutputDirectory &quot;${solution_directory}\..\NuGet&quot;" />
+        </exec>
+        <echo message="Tagolog.NLog NuGet pack result ${nuget_result}" />
     </target>
     <include buildfile="${project::get-base-directory()}\Include\Rebuild.include.nant.build" />
 </project>

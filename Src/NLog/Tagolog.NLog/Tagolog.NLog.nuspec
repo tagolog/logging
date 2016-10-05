@@ -1,20 +1,25 @@
 <?xml version="1.0"?>
 <package >
     <metadata>
-        <id>Tagolog</id>
+        <id>Tagolog.NLog</id>
         <version>0.2</version>
-        <title>Tagolog</title>
+        <title>Tagolog.NLog</title>
         <authors>w@tagolog.com</authors>
         <owners>w@tagolog.com</owners>
         <licenseUrl>https://raw.github.com/tagolog/Logging/master/license.txt</licenseUrl>
         <projectUrl>https://github.com/tagolog/Logging</projectUrl>
         <iconUrl>https://raw.github.com/tagolog/Logging/master/NuGet/Icons/Tag-O-Log.512x512.ico</iconUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
-        <description>Tagolog is a structured logging library for .NET. It can help you produce log entries marked with tags easily.</description>
+        <description>Tagolog.NLog is a Tagolog adapter for NLog logging framework. It can help you produce log entries marked with tags easily.</description>
         <tags>logging log tracing logfile structured tag</tags>
+        <dependencies>
+            <dependency id="Tagolog" version="0.2" />
+            <dependency id="NLog" version="4.2" />
+            <dependency id="Newtonsoft.Json" version="9.0" />
+        </dependencies>
     </metadata>
     <files>
-        <file src="bin/Release/Tagolog.dll" target="lib\net35\" />
-        <file src="bin/Release/Tagolog.pdb" target="lib\net35\" />
+        <file src="bin/Release/Tagolog.NLog.dll" target="lib\net35\" />
+        <file src="bin/Release/Tagolog.NLog.pdb" target="lib\net35\" />
     </files>
 </package>

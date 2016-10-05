@@ -1,11 +1,11 @@
 ﻿using System.IO;
 using System.Linq;
-using System.Xml.Serialization;
 using System.Collections.Generic;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace Tagolog.NLog
 {
-    public static class TagSerializer
+    static class TagSerializer
     {
         public static string TagsToString(
             IEnumerable<KeyValuePair<string, string>> tags,
@@ -18,12 +18,7 @@ namespace Tagolog.NLog
             // Pack serializable lists into single serializable class instance.
             var serializableTagCollection = new SerializableTagCollection( serializableTags, serializableBuiltInTags );
 
-            var serializer = CreateSerializer();
-            using ( var writer = new StringWriter() )
-            {
-                serializer.Serialize( writer, serializableTagCollection );
-                return writer.ToString();
-            }
+            return SerializeByBinaryFormatter( serializableTagCollection );
         }
 
         public static void TagsFromString(
@@ -31,27 +26,39 @@ namespace Tagolog.NLog
             out IDictionary<string, string> tags,
             out IDictionary<string, string> builtInTags )
         {
-            var serializer = CreateSerializer();
-            using ( var reader = new StringReader( source ) )
-            {
-                var serializableTagCollection = ( SerializableTagCollection ) serializer.Deserialize( reader );
+            var serializableTagCollection = DeserializeByBinaryFormatter( source );
 
-                tags = SerializableTagsToDictionary( serializableTagCollection.Tags );
-                builtInTags = SerializableTagsToDictionary( serializableTagCollection.BuiltInTags );
+            tags = SerializableTagsToDictionary( serializableTagCollection.Tags );
+            builtInTags = SerializableTagsToDictionary( serializableTagCollection.BuiltInTags );
+        }
+
+        static string SerializeByBinaryFormatter( SerializableTagCollection serializableTagCollection )
+        {
+            var binaryFormatter = new BinaryFormatter();
+            using ( var memoryStream = new MemoryStream() )
+            {
+                binaryFormatter.Serialize( memoryStream, serializableTagCollection );
+                return StringByteArrayConverter.ByteArrayToString( memoryStream.GetBuffer() );
             }
         }
 
-        static XmlSerializer CreateSerializer()
+        static SerializableTagCollection DeserializeByBinaryFormatter( string hexadecimalString )
         {
-            return new XmlSerializer( typeof ( SerializableTagCollection ) );
+            var bytes = StringByteArrayConverter.StringToByteArray( hexadecimalString );
+
+            var binaryFormatter = new BinaryFormatter();
+            using ( var memoryStream = new MemoryStream( bytes ) )
+            {
+                return ( SerializableTagCollection ) binaryFormatter.Deserialize( memoryStream );
+            }
         }
 
-        static List<SerializableTag> ToSerializableList( IEnumerable<KeyValuePair<string, string>> tags )
+        static List<Tag> ToSerializableList( IEnumerable<KeyValuePair<string, string>> tags )
         {
-            return tags.Select( tag => new SerializableTag( tag.Key, tag.Value ) ).ToList();
+            return tags.Select( tag => new Tag( tag.Key, tag.Value ) ).ToList();
         }
 
-        static IDictionary<string, string> SerializableTagsToDictionary( IEnumerable<SerializableTag> tags )
+        static IDictionary<string, string> SerializableTagsToDictionary( IEnumerable<Tag> tags )
         {
             return tags.ToDictionary( _ => _.Key, _ => _.Value );
         }

@@ -17,7 +17,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tagolog.Examples.CloudHosti
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NLog", "NLog", "{F3ECB4C5-695B-4EAA-B5EF-1B191799882B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tagolog.Examples.CloudHosting.NLog.TextLogConsoleExample", "Examples\CloudHosting\NLog\TextLogConsoleExample\Tagolog.Examples.CloudHosting.NLog.TextLogConsoleExample.csproj", "{0273A55C-9042-4A8D-BF60-A66CE974F987}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tagolog.Examples.CloudHosting.NLog.NLogConsoleExample", "Examples\CloudHosting\NLog\NLogConsoleExample\Tagolog.Examples.CloudHosting.NLog.NLogConsoleExample.csproj", "{0273A55C-9042-4A8D-BF60-A66CE974F987}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{1380B42F-30A5-41B9-93B7-FAD2FAFF4816}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tagolog.Tests.UnitTests", "Tests\UnitTests\Tagolog.Tests.UnitTests.csproj", "{BC85A6A0-D97C-426E-85D1-9DCE62BFC0D9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tagolog.NLog.UnitTests", "NLog\Tagolog.NLog.UnitTests\Tagolog.NLog.UnitTests.csproj", "{6140C201-579C-4B95-8D49-72EB74B282AE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -69,6 +75,26 @@ Global
 		{0273A55C-9042-4A8D-BF60-A66CE974F987}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{0273A55C-9042-4A8D-BF60-A66CE974F987}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{0273A55C-9042-4A8D-BF60-A66CE974F987}.Release|x86.ActiveCfg = Release|Any CPU
+		{BC85A6A0-D97C-426E-85D1-9DCE62BFC0D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC85A6A0-D97C-426E-85D1-9DCE62BFC0D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC85A6A0-D97C-426E-85D1-9DCE62BFC0D9}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{BC85A6A0-D97C-426E-85D1-9DCE62BFC0D9}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{BC85A6A0-D97C-426E-85D1-9DCE62BFC0D9}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{BC85A6A0-D97C-426E-85D1-9DCE62BFC0D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC85A6A0-D97C-426E-85D1-9DCE62BFC0D9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BC85A6A0-D97C-426E-85D1-9DCE62BFC0D9}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{BC85A6A0-D97C-426E-85D1-9DCE62BFC0D9}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{BC85A6A0-D97C-426E-85D1-9DCE62BFC0D9}.Release|x86.ActiveCfg = Release|Any CPU
+		{6140C201-579C-4B95-8D49-72EB74B282AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6140C201-579C-4B95-8D49-72EB74B282AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6140C201-579C-4B95-8D49-72EB74B282AE}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{6140C201-579C-4B95-8D49-72EB74B282AE}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{6140C201-579C-4B95-8D49-72EB74B282AE}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{6140C201-579C-4B95-8D49-72EB74B282AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6140C201-579C-4B95-8D49-72EB74B282AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6140C201-579C-4B95-8D49-72EB74B282AE}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{6140C201-579C-4B95-8D49-72EB74B282AE}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{6140C201-579C-4B95-8D49-72EB74B282AE}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -79,6 +105,8 @@ Global
 		{CD4AB063-96FE-45C1-B7D3-B7D2EACAE345} = {EB665850-DCC9-4E45-A3B4-EABEFD5F419C}
 		{F3ECB4C5-695B-4EAA-B5EF-1B191799882B} = {EB665850-DCC9-4E45-A3B4-EABEFD5F419C}
 		{0273A55C-9042-4A8D-BF60-A66CE974F987} = {F3ECB4C5-695B-4EAA-B5EF-1B191799882B}
+		{BC85A6A0-D97C-426E-85D1-9DCE62BFC0D9} = {1380B42F-30A5-41B9-93B7-FAD2FAFF4816}
+		{6140C201-579C-4B95-8D49-72EB74B282AE} = {6B21A631-3001-4FD5-8766-AD7ACD6E7FEB}
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = Tagolog.Logging.vsmdi

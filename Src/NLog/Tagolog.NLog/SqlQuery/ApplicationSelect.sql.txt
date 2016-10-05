@@ -1,5 +1,0 @@
-﻿select * 
-  from
-    log.application
-  where
-    code = @applicationcode

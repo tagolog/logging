@@ -1,14 +1,12 @@
 ﻿using System;
+using System.Diagnostics;
 
 namespace Tagolog
 {
     [Serializable]
+    [DebuggerDisplay( "[{Key}:{Value}]" )]
     public class Tag
     {
-        public Tag()
-        {
-        }
-
         public Tag( string key, string value )
         {
             Key = key;

@@ -1,27 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Xml.Serialization;
 
 namespace Tagolog.NLog
 {
     [Serializable]
-    [XmlRoot( "TagCollection" )]
-    public class SerializableTagCollection
+    class SerializableTagCollection
     {
         public SerializableTagCollection()
         {
         }
 
-        public SerializableTagCollection( List<SerializableTag> tags, List<SerializableTag> builtInTags )
+        public SerializableTagCollection( List<Tag> tags, List<Tag> builtInTags )
         {
             Tags = tags;
             BuiltInTags = builtInTags;
         }
 
-        [XmlArray( "Tags" ), XmlArrayItem( "Tag" )]
-        public List<SerializableTag> Tags { get; set; }
-
-        [XmlArray( "BuiltInTags" ), XmlArrayItem( "Tag" )]
-        public List<SerializableTag> BuiltInTags { get; set; }
+        public List<Tag> Tags { get; set; }
+        public List<Tag> BuiltInTags { get; set; }
     }
 }

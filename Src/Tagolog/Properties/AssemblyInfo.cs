@@ -19,5 +19,6 @@ using System.Runtime.InteropServices;
 // The following GUID is for the ID of the typelib if this project is exposed to COM
 [assembly: Guid("4a279db3-d6ca-4b33-9541-b2bb27919b23")]
 
-[assembly: InternalsVisibleTo( "Tagolog.NLog" )]
+#if !DISABLE_INTERNALS_VISIBLE_TO
 [assembly: InternalsVisibleTo( "Tagolog.UnitTest" )]
+#endif

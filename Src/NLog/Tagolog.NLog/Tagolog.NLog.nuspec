@@ -2,7 +2,7 @@
 <package >
     <metadata>
         <id>Tagolog.NLog</id>
-        <version>0.2</version>
+        <version>0.3</version>
         <title>Tagolog.NLog</title>
         <authors>w@tagolog.com</authors>
         <owners>w@tagolog.com</owners>

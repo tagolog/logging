@@ -44,10 +44,6 @@
       <Link>Properties\Tagolog.Logging.AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Helpers\ThrowHelper.cs" />
-    <Compile Include="Internal\ApplicationEntity.cs" />
-    <Compile Include="Internal\IApplicationRepository.cs" />
-    <Compile Include="Internal\IMessageRepository.cs" />
-    <Compile Include="Internal\LogLevel.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="ITagReadonlyCollection.cs" />
     <Compile Include="ITagCollection.cs" />

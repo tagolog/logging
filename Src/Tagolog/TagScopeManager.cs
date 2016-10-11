@@ -1,9 +1,8 @@
 ﻿using System;
-using System.CodeDom;
 using System.Collections.Generic;
+using Tagolog.Helpers;
 using Tagolog.Private;
 using Tagolog.Collections;
-using Tagolog.Helpers;
 
 namespace Tagolog
 {

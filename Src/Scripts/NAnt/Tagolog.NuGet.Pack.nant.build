@@ -7,7 +7,7 @@
     <property name="solution_platform" value="Any CPU" />
     <property name="solution_visual_studio_version" value="12.0" />
     <property name="msbuild_sign_assembly" value="true" />
-    <property name="msbuild_snk_file_name" value="${solution_directory}\..\..\..\Keys\Tagolog.Public.snk" />
+    <property name="msbuild_snk_file_name" value="${solution_directory}\..\..\..\Keys\Tagolog.PublicAndPrivate.Keys.snk" />
     <property name="msbuild_exe" value="${environment::get-variable('WINDIR')}\Microsoft.NET\Framework\v4.0.30319\msbuild.exe" readonly="true" />
     <property name="msbuild_log_enabled" value="false" />
     <property name="msbuild_log" value="${solution_directory}\msbuild.log" />

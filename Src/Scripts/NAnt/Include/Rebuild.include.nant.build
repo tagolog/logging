@@ -44,7 +44,6 @@
             <arg value="/p:SignAssembly=true" if="${msbuild_sign_assembly}" />
             <arg value='/p:DefineConstants="DISABLE_INTERNALS_VISIBLE_TO"' if="${msbuild_sign_assembly}" />
             <arg value='/p:AssemblyOriginatorKeyFile="${msbuild_snk_file_name}"' if="${msbuild_sign_assembly}" />
-            <arg value="/p:DelaySign=true" if="${msbuild_sign_assembly}" />
             <arg value="/target:rebuild" />
             <arg value="/fileLogger1" if="${msbuild_log_enabled}" />
             <arg value="/fileLoggerParameters1:LogFile=${msbuild_log}" if="${msbuild_log_enabled}" />

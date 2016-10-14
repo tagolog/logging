@@ -1,19 +1,10 @@
 ﻿using System.Reflection;
-using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Tagolog.NLog")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription( "Tagolog.NLog is a Tagolog adapter for NLog logging framework. It can help you produce log entries marked with tags easily." )]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyProduct( "Tagolog.NLog" )]
 [assembly: AssemblyCulture("")]
-
-// Setting ComVisible to false makes the types in this assembly not visible 
-// to COM components.  If you need to access a type in this assembly from 
-// COM, set the ComVisible attribute to true on that type.
-[assembly: ComVisible(false)]
-
-// The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("c4ea005d-85da-4c82-9252-d5f8f258ad93")]

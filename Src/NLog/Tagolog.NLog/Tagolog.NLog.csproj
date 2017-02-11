@@ -54,6 +54,7 @@
     <Compile Include="..\..\Tagolog.Logging.AssemblyInfo.cs">
       <Link>Properties\Tagolog.Logging.AssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="TagologMdcItemLayoutRenderer.cs" />
     <Compile Include="StringByteArrayConverter.cs" />
     <Compile Include="TagologJsonLayout.cs" />
     <Compile Include="MdcStorage.cs" />

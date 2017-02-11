@@ -46,10 +46,10 @@ namespace Tagolog.NLog
         public string Prefix { get; set; }
 
         /// <summary>
-        /// Renders the specified MDC item and appends it to the specified <see cref="StringBuilder" />.
+        /// Renders all items from Tagolog MDC context and appends them to the specified <see cref="StringBuilder" />.
         /// </summary>
-        /// <param key="builder">The <see cref="StringBuilder"/> to append the rendered data to.</param>
-        /// <param key="logEvent">Logging event.</param>
+        /// <param name="builder">The <see cref="StringBuilder"/> to append the rendered data to.</param>
+        /// <param name="logEvent">Logging event.</param>
         protected override void Append( StringBuilder builder, LogEventInfo logEvent )
         {
             var tagologContext = MdcStorage.GetContext();

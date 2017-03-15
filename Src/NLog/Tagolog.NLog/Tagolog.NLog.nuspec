@@ -2,7 +2,7 @@
 <package >
     <metadata>
         <id>Tagolog.NLog</id>
-        <version>0.5</version>
+        <version>0.6</version>
         <title>Tagolog.NLog</title>
         <authors>w@tagolog.com</authors>
         <owners>w@tagolog.com</owners>
@@ -13,7 +13,7 @@
         <description>Tagolog.NLog is a Tagolog adapter for NLog logging framework. It can help you produce log entries marked with tags easily.</description>
         <tags>logging log tracing logfile structured tag</tags>
         <dependencies>
-            <dependency id="Tagolog" version="0.2" />
+            <dependency id="Tagolog" version="0.6" />
             <dependency id="NLog" version="4.2" />
             <dependency id="Newtonsoft.Json" version="9.0" />
         </dependencies>

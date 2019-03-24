@@ -47,6 +47,5 @@ See [license.txt](license.txt) for details.
 
 ## How to build
 
-Use Visual Studio 2013/2015. Solution files are:
+Use Visual Studio 2017. Solution files are:
 - [Tagolog.Logging.sln](Src/Tagolog.Logging.sln) - Tagolog and Tagolog.NLog projects.
-- [Tagolog.Logging.Examples.sln](Src/Tagolog.Logging.Examples.sln) - Examples.

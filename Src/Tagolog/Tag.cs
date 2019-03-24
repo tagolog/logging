@@ -4,7 +4,7 @@ using System.Diagnostics;
 namespace Tagolog
 {
     [Serializable]
-    [DebuggerDisplay( "[{Key}:{Value}]" )]
+    [DebuggerDisplay( "[{Key}={Value}]" )]
     public class Tag
     {
         public Tag( string key, string value )

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Collections.Generic;
 using Tagolog.Helpers;
 
@@ -14,7 +13,7 @@ namespace Tagolog.Collections
         public TagReadonlyCollection( ITagReadonlyCollection collection )
         {
             if ( null == collection )
-                throw new ArgumentNullException( "collection", Properties.Resources.ValueCanNotBeNull_ErrorMessage );
+                throw ThrowHelper.ValueCanNotBeNullException( "collection" );
 
             _collection = collection;
         }

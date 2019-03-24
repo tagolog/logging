@@ -1,56 +1,61 @@
 ﻿using System.Collections.Generic;
-using Common.Logging;
-using Tagolog.Examples.CloudHosting.Emulator.Helpers;
 using Tagolog.Examples.CloudHosting.Emulator.Model;
+using Tagolog.Examples.CloudHosting.Emulator.Helpers;
+using Tagolog.Examples.CloudHosting.EmulatorInterface;
 
 namespace Tagolog.Examples.CloudHosting.Emulator
 {
-    internal static class DataCenter
+    class DataCenter
     {
-        public static void CreateNewVirtualMachine( string userId, string virtualMachineName )
+        public DataCenter( IEmulatorLogger emulatorLogger )
+        {
+            _emulatorLogger = emulatorLogger;
+        }
+
+        public void CreateNewVirtualMachine( string userId, string virtualMachineName )
         {
             using ( var scope = CreateTagScope( ClassHelper.GetCurrentMethodName() ) )
             {
-                lock ( VirtualMachinesLock )
+                lock ( _virtualMachinesLock )
                 {
                     var virtualMachine = new VirtualMachine( userId, virtualMachineName );
-                    VirtualMachines[ virtualMachineName ] = virtualMachine;
+                    _virtualMachines[ virtualMachineName ] = virtualMachine;
 
                     scope.Tags[ AppTag.UserId ] = userId;
                     scope.Tags[ AppTag.VirtualMachine ] = virtualMachineName;
-                    Logger.Info( "New virtual machine was created." );
+                    _emulatorLogger.Info( "New virtual machine was created." );
                 }
             }
         }
 
-        public static void StartVirtualMachine( string virtualMachineName )
+        public void StartVirtualMachine( string virtualMachineName )
         {
             using ( var scope = CreateTagScope( ClassHelper.GetCurrentMethodName() ) )
             {
-                lock ( VirtualMachinesLock )
+                lock ( _virtualMachinesLock )
                 {
-                    var virtualMachine = VirtualMachines[ virtualMachineName ];
+                    var virtualMachine = _virtualMachines[ virtualMachineName ];
 
                     scope.Tags[ AppTag.UserId ] = virtualMachine.UserId;
                     scope.Tags[ AppTag.VirtualMachine ] = virtualMachineName;
-                    Logger.Info( "Starting virtual machine..." );
+                    _emulatorLogger.Info( "Starting virtual machine..." );
 
                     virtualMachine.Start();
                 }
             }
         }
 
-        public static void StopVirtualMachine( string virtualMachineName )
+        public void StopVirtualMachine( string virtualMachineName )
         {
             using ( var scope = CreateTagScope( ClassHelper.GetCurrentMethodName() ) )
             {
-                lock ( VirtualMachinesLock )
+                lock ( _virtualMachinesLock )
                 {
-                    var virtualMachine = VirtualMachines[ virtualMachineName ];
+                    var virtualMachine = _virtualMachines[ virtualMachineName ];
 
                     scope.Tags[ AppTag.UserId ] = virtualMachine.UserId;
                     scope.Tags[ AppTag.VirtualMachine ] = virtualMachineName;
-                    Logger.Info( "Stopping virtual machine..." );
+                    _emulatorLogger.Info( "Stopping virtual machine..." );
 
                     virtualMachine.Stop();
                 }
@@ -71,8 +76,8 @@ namespace Tagolog.Examples.CloudHosting.Emulator
             get { return typeof( DataCenter ).Name; }
         }
 
-        readonly static object VirtualMachinesLock = new object();
-        readonly static Dictionary<string, VirtualMachine> VirtualMachines = new Dictionary<string, VirtualMachine>();
-        readonly static ILog Logger = LogManager.GetLogger( typeof( DataCenter ) );
+        readonly IEmulatorLogger _emulatorLogger;
+        readonly object _virtualMachinesLock = new object();
+        readonly Dictionary<string, VirtualMachine> _virtualMachines = new Dictionary<string, VirtualMachine>();
     }
 }

@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;net3.5</TargetFrameworks>
+    <PackageId>Tagolog.NLog</PackageId>
+    <Description>Tagolog.NLog is a Tagolog adapter for NLog logging framework. It can help you produce log entries marked with tags easily.</Description>
+    <Authors>Tagolog</Authors>
+    <Product>Tagolog Logging Library</Product>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="10.0.1" />
+    <PackageReference Include="NLog" Version="4.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Tagolog\Tagolog.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+
+</Project>

@@ -8,15 +8,18 @@ namespace Tagolog
 {
     public static class TagScopeManager
     {
+        public static void ConfigureLogAdapter( string logAdapterFullyQualifiedTypeName )
+        {
+            _logAdapterFullyQualifiedTypeName = logAdapterFullyQualifiedTypeName;
+        }
+
         public static ITagScope CreateScope()
         {
-            LoadLogAdapter();
             return ThreadContext.CreateScope();
         }
 
         public static ITagScope CreateScope( IDictionary<string, string> tags )
         {
-            LoadLogAdapter();
             return ThreadContext.CreateScope( tags );
         }
 
@@ -39,9 +42,15 @@ namespace Tagolog
                     {
                         if ( _logAdapter == null )
                         {
-                            var logAdapter = LoadLogAdapter();
+                            var logAdapter = string.IsNullOrEmpty( _logAdapterFullyQualifiedTypeName )
+                                ? LoadLogAdapter()
+                                : CreateLogAdapter( _logAdapterFullyQualifiedTypeName );
 
-                            System.Threading.Thread.MemoryBarrier();
+                            // Commented after reading following articles:
+                            // https://csharpindepth.com/Articles/Singleton - Implementing the Singleton Pattern in C#
+                            // http://www.albahari.com/threading/part4.aspx - Threading in C# Joseph Albahari
+                            // Commented: System.Threading.Thread.MemoryBarrier();
+
                             _logAdapter = logAdapter;
                         }
                     }
@@ -56,7 +65,11 @@ namespace Tagolog
 
                 lock ( _logAdapterLock )
                 {
-                    System.Threading.Thread.MemoryBarrier();
+                    // Commented after reading following articles:
+                    // https://csharpindepth.com/Articles/Singleton - Implementing the Singleton Pattern in C#
+                    // http://www.albahari.com/threading/part4.aspx - Threading in C# Joseph Albahari
+                    // Commented: System.Threading.Thread.MemoryBarrier();
+
                     _logAdapter = value;
                 }
             }
@@ -88,13 +101,29 @@ namespace Tagolog
         }
 
         /// <summary>
+        /// Creates an instance of the log adapter.
+        /// </summary>
+        /// <returns>Log adapter instance.</returns>
+        static ITagLogAdapter CreateLogAdapter( string fullyQualifiedTypeName )
+        {
+            var tagLogAdapterType = Type.GetType( fullyQualifiedTypeName, true, false );
+            return ( ITagLogAdapter ) Activator.CreateInstance( tagLogAdapterType );
+        }
+
+        /// <summary>
         /// Builds the logger factory adapter.
         /// </summary>
         /// <returns>a factory adapter instance. Is never <c>null</c>.</returns>
         static ITagLogAdapter LoadLogAdapter()
         {
-            var setting = ConfigurationSectionHandler.Load();
-            return ( ITagLogAdapter ) Activator.CreateInstance( setting.LogAdapterType );
+            throw new InvalidOperationException(
+                "This operation is not supported on .NET Core platform. " +
+                "You should use TagScopeManager.ConfigureLogAdapter( ... ) method call to avoid this exception." );
+#if NETCOREAPP
+#else
+            //var setting = ConfigurationSectionHandler.Load();
+            //return ( ITagLogAdapter ) Activator.CreateInstance( setting.LogAdapterType );
+#endif // NETCOREAPP
         }
 
         #endregion // Helpers
@@ -118,6 +147,11 @@ namespace Tagolog
         /// Log adapter - wrapper for underlying logging subsystem.
         /// </summary>
         static volatile ITagLogAdapter _logAdapter;
+
+        /// <summary>
+        /// By default - fallback to NO OP adapter.
+        /// </summary>
+        static string _logAdapterFullyQualifiedTypeName = "Tagolog.Adapters.NoOpLogAdapter,Tagolog";
 
         #endregion // Data
     }

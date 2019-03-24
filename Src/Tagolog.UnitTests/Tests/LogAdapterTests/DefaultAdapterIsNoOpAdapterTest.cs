@@ -1,0 +1,22 @@
+﻿using NUnit.Framework;
+using Tagolog.Adapters;
+
+namespace Tagolog.UnitTests.Tests.LogAdapterTests
+{
+    [TestFixture]
+    [NonParallelizable]
+    [Ignore("This test failed if executed in a chain with other tests due to TagScopeManager singleton nature.")]
+    class DefaultAdapterIsNoOpAdapterTest
+    {
+        [Test]
+        public void LogAdapter_DefaultAdapterIsNoOpAdapter()
+        {
+            var adapter = TagScopeManager.LogAdapter;
+
+            Assert.IsNotNull( adapter, "Log adapter cannot be null" );
+
+            Assert.IsTrue( adapter is NoOpLogAdapter,
+                "Default log adapter should be of {0} type", typeof( NoOpLogAdapter ).Name  );
+        }
+    }
+}

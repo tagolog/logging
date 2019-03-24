@@ -6,6 +6,7 @@ using Tagolog.Adapters;
 
 namespace Tagolog
 {
+#if !NETCOREAPP
     public class ConfigurationSectionHandler : IConfigurationSectionHandler
     {
         public const string ConfigurationSectionName = "tagolog";
@@ -24,7 +25,7 @@ namespace Tagolog
             return ( TagologSetting ) config;
         }
 
-        #region "IConfigurationSectionHandler" interface implementation
+#region "IConfigurationSectionHandler" interface implementation
 
         object IConfigurationSectionHandler.Create( object parent, object configContext, XmlNode section )
         {
@@ -63,9 +64,9 @@ namespace Tagolog
             return new TagologSetting( Type.GetType( adapterTypeName, true, false ) );
         }
 
-        #endregion // "IConfigurationSectionHandler" interface implementation
+#endregion // "IConfigurationSectionHandler" interface implementation
 
-        #region Data
+#region Data
 
         static class XmlName
         {
@@ -73,6 +74,7 @@ namespace Tagolog
             public static readonly string TypeAttribute = "type";
         }
 
-        #endregion // Data
+#endregion // Data
     }
+#endif
 }

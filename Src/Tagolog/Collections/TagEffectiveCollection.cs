@@ -15,10 +15,10 @@ namespace Tagolog.Collections
         public TagEffectiveCollection( ITagReadonlyCollection parent, ITagReadonlyCollection current )
         {
             if ( null == parent )
-                throw new ArgumentNullException( "parent", Properties.Resources.ValueCanNotBeNull_ErrorMessage );
+                throw ThrowHelper.ValueCanNotBeNullException( "parent" );
 
             if ( null == current )
-                throw new ArgumentNullException( "current", Properties.Resources.ValueCanNotBeNull_ErrorMessage );
+                throw ThrowHelper.ValueCanNotBeNullException( "current" );
 
             _parent = parent;
             _current = current;
@@ -40,8 +40,7 @@ namespace Tagolog.Collections
                 if ( _parent.ContainsKey( tagKey ) )
                     return _parent[ tagKey ];
 
-                throw new ArgumentException(
-                    string.Format( Properties.Resources.TagKeyWasNotPresentInTagCollection_ErrorMessageTemplate1, tagKey ) );
+                throw ThrowHelper.TagKeyWasNotPresentInTagCollectionException( tagKey );
             }
         }
 

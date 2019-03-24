@@ -1,36 +1,42 @@
 ﻿using System;
 using System.Threading;
 using System.Collections.Generic;
-using Common.Logging;
 using Tagolog.Examples.CloudHosting.Emulator.Model;
 using Tagolog.Examples.CloudHosting.Emulator.Helpers;
+using Tagolog.Examples.CloudHosting.EmulatorInterface;
 
 namespace Tagolog.Examples.CloudHosting.Emulator
 {
-    static class WebInterface
+    class WebInterface
     {
+        public WebInterface( IEmulatorLogger emulatorLogger )
+        {
+            _emulatorLogger = emulatorLogger;
+            _dataCenter = new DataCenter( emulatorLogger );
+        }
+
         /// <summary>
         /// Emulates process of creating a new user.
         /// Password is skipped since not used in emulation.
         /// </summary>
-        public static void RegisterNewUser( string email, string firstName, string lastName )
+        public void RegisterNewUser( string email, string firstName, string lastName )
         {
             using ( var scope = CreateTagScope( ClassHelper.GetCurrentMethodName() ) )
             {
                 scope.Tags[ AppTag.Email ] = email;
                 scope.Tags[ AppTag.FirstName ] = firstName;
                 scope.Tags[ AppTag.LastName ] = lastName;
-                Logger.Info( "Request to register new user." );
+                _emulatorLogger.Info( "Request to register new user." );
 
-                lock ( Locker )
+                lock ( _locker )
                 {
                     var user = new User( email );
-                    Users.Add( email, user );
+                    _users.Add( email, user );
                     // Bind further log entries to user ID.
                     scope.Tags[ AppTag.UserId ] = user.UserId;
                 }
 
-                Logger.Info( "New user registered." );
+                _emulatorLogger.Info( "New user registered." );
             }
         }
 
@@ -43,40 +49,40 @@ namespace Tagolog.Examples.CloudHosting.Emulator
         /// Session ID in case of successful authentication.
         /// Null or empty string if authentication fails.
         /// </returns>
-        public static string Authenticate( string email )
+        public string Authenticate( string email )
         {
             using ( var scope = CreateTagScope( ClassHelper.GetCurrentMethodName() ) )
             {
                 scope.Tags[ AppTag.Email ] = email;
 
                 // Bind further log entries to user ID.
-                lock ( Locker )
+                lock ( _locker )
                 {
-                    scope.Tags[ AppTag.UserId ] = Users[ email ].UserId;
+                    scope.Tags[ AppTag.UserId ] = _users[ email ].UserId;
                 }
 
                 if ( RandomHelper.GenerateBoolean() )
                 {
                     var sessionId = Guid.NewGuid().ToString( "D" );
-                    lock ( Locker )
+                    lock ( _locker )
                     {
-                        Sessions.Add( sessionId, email );
+                        _sessions.Add( sessionId, email );
                     }
 
                     scope.Tags[ AppTag.SessionId ] = sessionId;
-                    Logger.Info( "Authentication succeeded." );
+                    _emulatorLogger.Info( "Authentication succeeded." );
 
                     return sessionId;
                 }
                 else
                 {
-                    Logger.Error( "Authentication failed." );
+                    _emulatorLogger.Error( "Authentication failed." );
                     return null;
                 }
             }
         }
 
-        public static bool OrderNewVirtualMachine( string sessionId, string virtualMachineName, decimal amount )
+        public bool OrderNewVirtualMachine( string sessionId, string virtualMachineName, decimal amount )
         {
             using ( var scope = CreateTagScope( ClassHelper.GetCurrentMethodName() ) )
             {
@@ -84,57 +90,55 @@ namespace Tagolog.Examples.CloudHosting.Emulator
                 scope.Tags[ AppTag.UserId ] = user.UserId;
                 scope.Tags[ AppTag.SessionId ] = sessionId;
 
-                Logger.InfoFormat( "Redirect user to external payment system. Amount = {0}", amount );
+                _emulatorLogger.InfoFormat( "Redirect user to external payment system. Amount = {0}", amount );
 
                 if ( RandomHelper.GenerateBoolean() )
                 {
                     scope.Tags[ AppTag.VirtualMachine ] = virtualMachineName;
-                    Logger.Info( "Creating virtual machine..." );
-                    ThreadPool.QueueUserWorkItem( _ => DataCenter.CreateNewVirtualMachine( user.UserId, virtualMachineName ) );
+                    _emulatorLogger.Info( "Creating virtual machine..." );
+                    ThreadPool.QueueUserWorkItem( _ => _dataCenter.CreateNewVirtualMachine( user.UserId, virtualMachineName ) );
                     return true;
                 }
 
                 var errorId = Guid.NewGuid().ToString( "D" );
                 scope.Tags[ AppTag.ErrorId ] = errorId;
-                Logger.Error( "Payment failed. Unique error ID was displayed." );
+                _emulatorLogger.Error( "Payment failed. Unique error ID was displayed." );
                 return false;
             }
         }
 
-        public static void StartVirtualMachine( string sessionId, string virtualMachineName )
+        public void StartVirtualMachine( string sessionId, string virtualMachineName )
         {
             using ( var scope = CreateTagScope( ClassHelper.GetCurrentMethodName() ) )
             {
                 scope.Tags[ AppTag.SessionId ] = sessionId;
                 scope.Tags[ AppTag.UserId ] = GetUserBySession( sessionId ).UserId;
                 scope.Tags[ AppTag.VirtualMachine ] = virtualMachineName;
-                Logger.Info( "User requested to start virtual machine." );
+                _emulatorLogger.Info( "User requested to start virtual machine." );
 
-                ThreadPool.QueueUserWorkItem( _ => DataCenter.StartVirtualMachine( virtualMachineName ) );
+                ThreadPool.QueueUserWorkItem( _ => _dataCenter.StartVirtualMachine( virtualMachineName ) );
             }
         }
 
-        public static void StopVirtualMachine( string sessionId, string virtualMachineName )
+        public void StopVirtualMachine( string sessionId, string virtualMachineName )
         {
             using ( var scope = CreateTagScope( ClassHelper.GetCurrentMethodName() ) )
             {
                 scope.Tags[ AppTag.SessionId ] = sessionId;
                 scope.Tags[ AppTag.UserId ] = GetUserBySession( sessionId ).UserId;
                 scope.Tags[ AppTag.VirtualMachine ] = virtualMachineName;
-                Logger.Info( "User requested to stop virtual machine." );
+                _emulatorLogger.Info( "User requested to stop virtual machine." );
 
-                ThreadPool.QueueUserWorkItem( _ => DataCenter.StopVirtualMachine( virtualMachineName ) );
+                ThreadPool.QueueUserWorkItem( _ => _dataCenter.StopVirtualMachine( virtualMachineName ) );
             }
         }
 
-        #region Helpers
-
-        static User GetUserBySession( string sessionId )
+        User GetUserBySession( string sessionId )
         {
-            lock ( Locker )
+            lock ( _locker )
             {
-                var email = Sessions[ sessionId ];
-                return Users[ email ];
+                var email = _sessions[ sessionId ];
+                return _users[ email ];
             }
         }
 
@@ -147,20 +151,19 @@ namespace Tagolog.Examples.CloudHosting.Emulator
             } );
         }
 
-        #endregion // Helpers
+        readonly IEmulatorLogger _emulatorLogger;
+        readonly DataCenter _dataCenter;
 
-        readonly static object Locker = new object(); 
+        readonly object _locker = new object(); 
 
         /// <summary>
         /// Map email to user instance.
         /// </summary>
-        readonly static Dictionary<string, User> Users = new Dictionary<string, User>();
+        readonly Dictionary<string, User> _users = new Dictionary<string, User>();
 
         /// <summary>
         /// Map sessionId to email.
         /// </summary>
-        readonly static Dictionary<string, string> Sessions = new Dictionary<string, string>();
-
-        readonly static ILog Logger = LogManager.GetLogger( typeof( WebInterface ) );
+        readonly Dictionary<string, string> _sessions = new Dictionary<string, string>();
     }
 }

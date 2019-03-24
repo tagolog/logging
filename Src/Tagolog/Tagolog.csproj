@@ -1,95 +1,21 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{1745BECA-9083-4211-AFAC-124860FFB16C}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Tagolog</RootNamespace>
+    <TargetFrameworks>netstandard2.0;net3.5</TargetFrameworks>
     <AssemblyName>Tagolog</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
+    <RootNamespace>Tagolog</RootNamespace>
+    <Description>Tagolog is a structured logging library for .NET. It can help you produce log entries marked with tags easily.</Description>
+    <Product>Tagolog Logging Library</Product>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Configuration" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
+    <Compile Remove="ConfigurationSectionHandler.cs" />
+    <Compile Remove="Private\TagologSettings.cs" />
   </ItemGroup>
+
   <ItemGroup>
-    <Compile Include="..\Tagolog.Logging.AssemblyInfo.cs">
-      <Link>Properties\Tagolog.Logging.AssemblyInfo.cs</Link>
-    </Compile>
-    <Compile Include="Helpers\ThrowHelper.cs" />
-    <Compile Include="Constants.cs" />
-    <Compile Include="ITagReadonlyCollection.cs" />
-    <Compile Include="ITagCollection.cs" />
-    <Compile Include="Private\Correlation\ThreadCorrelationId.cs" />
-    <Compile Include="Private\Correlation\ThreadGuidCorrelationId.cs" />
-    <Compile Include="Private\CustomDictionary\DictionaryWithChangedEvent.cs" />
-    <Compile Include="ITagScope.cs" />
-    <Compile Include="ITagLogAdapter.cs" />
-    <Compile Include="Private\CustomDictionary\DictionaryChangedEventArgs.cs" />
-    <Compile Include="Private\ITagThreadContext.cs" />
-    <Compile Include="Adapters\NoOpLogAdapter.cs" />
-    <Compile Include="Collections\TagCollection.cs" />
-    <Compile Include="Collections\TagEffectiveCollection.cs" />
-    <Compile Include="Collections\TagReadonlyCollection.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Private\TagScope.cs" />
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Tag.cs" />
-    <Compile Include="TagCollectionDebugView.cs" />
-    <Compile Include="TagScopeManager.cs" />
-    <Compile Include="ConfigurationSectionHandler.cs" />
-    <Compile Include="Private\TagologSettings.cs" />
-    <Compile Include="Private\TagThreadContext.cs" />
+    <None Include="ConfigurationSectionHandler.cs" />
+    <None Include="Private\TagologSettings.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="app.config" />
-    <None Include="Tagolog.nuspec">
-      <SubType>Designer</SubType>
-    </None>
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+
 </Project>

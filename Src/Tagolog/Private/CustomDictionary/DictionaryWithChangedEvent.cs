@@ -120,20 +120,23 @@ namespace Tagolog.Private.CustomDictionary
 
         void OnChanged()
         {
-            if ( null != Changed )
-                Changed.Invoke( this, null );
+            var changed = Changed;
+            if ( null != changed )
+                changed.Invoke( this, null );
         }
 
         void OnChanged( TKey key )
         {
-            if ( null != Changed )
-                Changed.Invoke( this, new DictionaryChangedEventArgs<TKey, TValue>( key ) );
+            var changed = Changed;
+            if ( null != changed )
+                changed.Invoke( this, new DictionaryChangedEventArgs<TKey, TValue>( key ) );
         }
 
         void OnChanged( TKey key, TValue value )
         {
-            if ( null != Changed )
-                Changed.Invoke( this, new DictionaryChangedEventArgs<TKey, TValue>( key, value ) );
+            var changed = Changed;
+            if ( null != changed )
+                changed.Invoke( this, new DictionaryChangedEventArgs<TKey, TValue>( key, value ) );
         }
 
         #endregion // Helpers

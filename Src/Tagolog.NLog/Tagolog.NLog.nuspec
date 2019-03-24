@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+    <metadata>
+        <id>Tagolog.NLog</id>
+        <version>1.0</version>
+        <title>Tagolog.NLog</title>
+        <authors>w@tagolog.com</authors>
+        <owners>w@tagolog.com</owners>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <licenseUrl>https://raw.github.com/tagolog/Logging/master/license.txt</licenseUrl>
+        <projectUrl>https://github.com/tagolog/Logging</projectUrl>
+        <iconUrl>https://raw.github.com/tagolog/Logging/master/NuGet/Icons/Tag-O-Log.512x512.ico</iconUrl>
+        <repository type="git" url="https://github.com/tagolog/logging.git" />
+        <description>Tagolog.NLog is a Tagolog adapter for NLog logging framework. It can help you produce log entries marked with tags easily.
+Supported platforms:
+- .NET Framework 3.5+;
+- .NET Standard 2.0+;
+</description>
+        <copyright>Copyright (c) 20016-2019 Tagolog Project - https://github.com/tagolog/Logging</copyright>
+        <tags>logging log tracing logfile structured tag</tags>
+        <dependencies>
+            <dependency id="Tagolog" version="1.0" />
+            <dependency id="NLog" version="4.5" />
+            <dependency id="Newtonsoft.Json" version="10.0.1" />
+        </dependencies>
+    </metadata>
+    <files>
+        <file src="bin/Release/net3.5/Tagolog.NLog.dll" target="lib\net35\" />
+        <file src="bin/Release/net3.5/Tagolog.NLog.pdb" target="lib\net35\" />
+        <file src="bin/Release/netstandard2.0/Tagolog.NLog.dll" target="lib\netstandard2.0\" />
+        <file src="bin/Release/netstandard2.0/Tagolog.NLog.pdb" target="lib\netstandard2.0\" />
+    </files>
+</package>

@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <Company>Tagolog</Company>
+    <Product>Tagolog Logging Library</Product>
+    <RootNamespace>Tagolog.Examples.CloudHosting.DotNetCore.NLog.ConsoleExample</RootNamespace>
+    <AssemblyName>Tagolog.Examples.CloudHosting.DotNetCore.NLog.ConsoleExample</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NLog" Version="4.6.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Tagolog.NLog\Tagolog.NLog.csproj" />
+    <ProjectReference Include="..\..\Emulator\Tagolog.Examples.CloudHosting.Emulator.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="NLog.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

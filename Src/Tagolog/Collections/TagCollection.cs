@@ -103,8 +103,8 @@ namespace Tagolog.Collections
         void ThrowIfNoKeyInCollection( string key )
         {
             var normalizedKey = NormalizeKey( key );
-            if ( !_tags.ContainsKey( normalizedKey ) )
-                throw new ArgumentException( string.Format( Properties.Resources.TagKeyWasNotPresentInTagCollection_ErrorMessageTemplate1, key ) );
+            if ( ! _tags.ContainsKey( normalizedKey ) )
+                throw ThrowHelper.TagKeyWasNotPresentInTagCollectionException( key );
         }
 
         static string NormalizeKey( string key )
